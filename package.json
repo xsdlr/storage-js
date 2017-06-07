@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/xsdlr/storage-js#readme",
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash-es": "^4.17.4",
     "logger-js": "https://github.com/xsdlr/logger-js"
   }
 }

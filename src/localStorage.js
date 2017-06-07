@@ -1,7 +1,6 @@
-import isNumber from 'lodash/isNumber'
-import isString from 'lodash/isString'
-import isNil from 'lodash/isNil'
-import {assert} from './util'
+import isNumber from 'lodash-es/isNumber'
+import isString from 'lodash-es/isString'
+import {assert, isNil} from './util'
 import Logger from 'logger-js'
 
 function _validateKey(key) {

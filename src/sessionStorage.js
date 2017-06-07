@@ -1,14 +1,13 @@
-import isString from 'lodash/isString'
-import isNil from 'lodash/isNil'
-import { assert } from './util'
+import isString from 'lodash-es/isString'
+import {assert, isNil} from './util'
 import Logger from 'logger-js'
 
-function _validateKey (key) {
+function _validateKey(key) {
   assert(!isNil(key), '[SessionStorage] key不能为空')
   assert(isString(key), '[SessionStorage] key必须为string')
 }
 
-export function setItem (key, value) {
+export function setItem(key, value) {
   _validateKey(key)
   isNil(value) && Logger.warn('[SessionStorage] ', 'value为null或undefined')
 
@@ -19,7 +18,7 @@ export function setItem (key, value) {
   sessionStorage.setItem(key, JSON.stringify(storeValue))
 }
 
-export function getItem (key) {
+export function getItem(key) {
   _validateKey(key)
   const storageString = sessionStorage.getItem(key) || '{}'
   let jsonValue = {}
@@ -32,12 +31,12 @@ export function getItem (key) {
   return value
 }
 
-export function removeItem (key) {
+export function removeItem(key) {
   _validateKey(key)
   sessionStorage.removeItem(key)
 }
 
-export function clear () {
+export function clear() {
   sessionStorage.clear()
 }
 
