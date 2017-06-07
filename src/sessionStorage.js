@@ -9,12 +9,12 @@ function _validateKey(key) {
 
 export function setItem(key, value) {
   _validateKey(key)
-  isNil(value) && Logger.warn('[SessionStorage] ', 'value为null或undefined')
+  isNil(value) && Logger.warn('[SessionStorage] value为null或undefined')
 
   const storeValue = {
     value
   }
-  Logger.debug(`key: ${key}`, `storeValue: ${JSON.stringify(storeValue)}`)
+  Logger.debug('[SessionStorage] save', `key: ${key}`, storeValue)
   sessionStorage.setItem(key, JSON.stringify(storeValue))
 }
 
@@ -25,7 +25,7 @@ export function getItem(key) {
   try {
     jsonValue = JSON.parse(storageString)
   } catch (e) {
-    Logger.warn('[SessionStorage] ', '存储的值无法解析')
+    Logger.warn('[SessionStorage] 存储的值无法解析')
   }
   const {value} = jsonValue
   return value

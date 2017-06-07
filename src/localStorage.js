@@ -4,21 +4,21 @@ import {assert, isNil} from './util'
 import Logger from 'logger-js'
 
 function _validateKey(key) {
-  assert(!isNil(key), '[ExpireLocalStorage] key不能为空')
-  assert(isString(key), '[ExpireLocalStorage] key必须为string')
+  assert(!isNil(key), '[LocalStorage] key不能为空')
+  assert(isString(key), '[LocalStorage] key必须为string')
 }
 
 export function setItem(key, value, expire) {
   _validateKey(key)
-  isNil(value) && Logger.warn('[ExpireLocalStorage] ', 'value为null或undefined')
+  isNil(value) && Logger.warn('[LocalStorage] value为null或undefined')
   const _expire = expire || 0
-  assert(isNumber(_expire), '[ExpireLocalStorage] expire必须是number')
+  assert(isNumber(_expire), '[LocalStorage] expire必须是number')
 
   const storeValue = {
     value,
     expireTime: _expire > 0 ? Date.now() + _expire : null
   }
-  Logger.debug(`key: ${key}`, `storeValue: ${JSON.stringify(storeValue)}`)
+  Logger.debug('[LocalStorage] save', `key: ${key}`, storeValue)
   localStorage.setItem(key, JSON.stringify(storeValue))
 }
 
@@ -29,7 +29,7 @@ export function getItem(key) {
   try {
     jsonValue = JSON.parse(localStorageString)
   } catch (e) {
-    Logger.warn('[ExpireLocalStorage] ', '存储的值无法解析')
+    Logger.warn('[LocalStorage] 存储的值无法解析')
   }
   const {value, expireTime} = jsonValue
   if (isNil(expireTime) || expireTime >= Date.now()) {

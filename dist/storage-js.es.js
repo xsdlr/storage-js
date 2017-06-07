@@ -303,21 +303,21 @@ class Logger {
 var index$1 = new Logger();
 
 function _validateKey(key) {
-  assert(!isNil(key), '[ExpireLocalStorage] key不能为空');
-  assert(isString(key), '[ExpireLocalStorage] key必须为string');
+  assert(!isNil(key), '[LocalStorage] key不能为空');
+  assert(isString(key), '[LocalStorage] key必须为string');
 }
 
 function setItem(key, value, expire) {
   _validateKey(key);
-  isNil(value) && index$1.warn('[ExpireLocalStorage] ', 'value为null或undefined');
+  isNil(value) && index$1.warn('[LocalStorage] value为null或undefined');
   const _expire = expire || 0;
-  assert(isNumber(_expire), '[ExpireLocalStorage] expire必须是number');
+  assert(isNumber(_expire), '[LocalStorage] expire必须是number');
 
   const storeValue = {
     value,
     expireTime: _expire > 0 ? Date.now() + _expire : null
   };
-  index$1.debug(`key: ${key}`, `storeValue: ${JSON.stringify(storeValue)}`);
+  index$1.debug('[LocalStorage] save', `key: ${key}`, storeValue);
   localStorage.setItem(key, JSON.stringify(storeValue));
 }
 
@@ -328,7 +328,7 @@ function getItem(key) {
   try {
     jsonValue = JSON.parse(localStorageString);
   } catch (e) {
-    index$1.warn('[ExpireLocalStorage] ', '存储的值无法解析');
+    index$1.warn('[LocalStorage] 存储的值无法解析');
   }
   const { value, expireTime } = jsonValue;
   if (isNil(expireTime) || expireTime >= Date.now()) {
@@ -363,12 +363,12 @@ function _validateKey$1(key) {
 
 function setItem$1(key, value) {
   _validateKey$1(key);
-  isNil(value) && index$1.warn('[SessionStorage] ', 'value为null或undefined');
+  isNil(value) && index$1.warn('[SessionStorage] value为null或undefined');
 
   const storeValue = {
     value
   };
-  index$1.debug(`key: ${key}`, `storeValue: ${JSON.stringify(storeValue)}`);
+  index$1.debug('[SessionStorage] save', `key: ${key}`, storeValue);
   sessionStorage.setItem(key, JSON.stringify(storeValue));
 }
 
@@ -379,7 +379,7 @@ function getItem$1(key) {
   try {
     jsonValue = JSON.parse(storageString);
   } catch (e) {
-    index$1.warn('[SessionStorage] ', '存储的值无法解析');
+    index$1.warn('[SessionStorage] 存储的值无法解析');
   }
   const { value } = jsonValue;
   return value;
