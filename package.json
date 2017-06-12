@@ -2,8 +2,8 @@
   "name": "storage-js",
   "version": "0.0.1",
   "description": "js storage",
-  "main": "dist/storage-js.js",
-  "jsnext:main": "dist/storage-js.es.js",
+  "main": "dist/index.js",
+  "jsnext:main": "dist/index.es.js",
   "unpkg": "dist/storage-js.js",
   "files": [
     "src",
