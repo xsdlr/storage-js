@@ -220,7 +220,7 @@ function isString(value) {
 }
 
 function assert(condition, msg) {
-  if (!condition) throw new Error(`${msg}`);
+  if (!condition) throw new Error("" + msg);
 }
 
 function isNil(value) {
@@ -314,31 +314,34 @@ function _validateKey(key) {
 function setItem(key, value, expire) {
   _validateKey(key);
   isNil(value) && index$1.warn('[LocalStorage] value为null或undefined');
-  const _expire = expire || 0;
+  var _expire = expire || 0;
   assert(isNumber(_expire), '[LocalStorage] expire必须是number');
 
-  const storeValue = {
-    value,
+  var storeValue = {
+    value: value,
     expireTime: _expire > 0 ? Date.now() + _expire : null
   };
-  index$1.debug('[LocalStorage] save', `key: ${key}`, storeValue);
+  index$1.debug('[LocalStorage] save', 'key: ' + key, storeValue);
   localStorage.setItem(key, JSON.stringify(storeValue));
 }
 
 function getItem(key) {
   _validateKey(key);
-  const localStorageString = localStorage.getItem(key) || '{}';
-  let jsonValue = {};
+  var localStorageString = localStorage.getItem(key) || '{}';
+  var jsonValue = {};
   try {
     jsonValue = JSON.parse(localStorageString);
   } catch (e) {
     index$1.warn('[LocalStorage] 存储的值无法解析');
   }
-  const { value, expireTime } = jsonValue;
+  var _jsonValue = jsonValue,
+      value = _jsonValue.value,
+      expireTime = _jsonValue.expireTime;
+
   if (isNil(expireTime) || expireTime >= Date.now()) {
     return value;
   } else {
-    index$1.debug(`key为${key}的值超时删除`);
+    index$1.debug('key\u4E3A' + key + '\u7684\u503C\u8D85\u65F6\u5220\u9664');
     localStorage.removeItem(key);
     return undefined;
   }
@@ -354,10 +357,10 @@ function clear() {
 }
 
 var localStorage$1 = {
-  setItem,
-  getItem,
-  removeItem,
-  clear
+  setItem: setItem,
+  getItem: getItem,
+  removeItem: removeItem,
+  clear: clear
 };
 
 function _validateKey$1(key) {
@@ -369,23 +372,25 @@ function setItem$1(key, value) {
   _validateKey$1(key);
   isNil(value) && index$1.warn('[SessionStorage] value为null或undefined');
 
-  const storeValue = {
-    value
+  var storeValue = {
+    value: value
   };
-  index$1.debug('[SessionStorage] save', `key: ${key}`, storeValue);
+  index$1.debug('[SessionStorage] save', 'key: ' + key, storeValue);
   sessionStorage.setItem(key, JSON.stringify(storeValue));
 }
 
 function getItem$1(key) {
   _validateKey$1(key);
-  const storageString = sessionStorage.getItem(key) || '{}';
-  let jsonValue = {};
+  var storageString = sessionStorage.getItem(key) || '{}';
+  var jsonValue = {};
   try {
     jsonValue = JSON.parse(storageString);
   } catch (e) {
     index$1.warn('[SessionStorage] 存储的值无法解析');
   }
-  const { value } = jsonValue;
+  var _jsonValue = jsonValue,
+      value = _jsonValue.value;
+
   return value;
 }
 
