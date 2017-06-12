@@ -227,18 +227,15 @@ function isNil(value) {
   return value == null;
 }
 
-/*
- * logger-js v0.0.1
- * (c) xsdlr
- * Released under the MIT License.
- */
-
 /**
  * Created by xsdlr on 2017/4/25.
  */
-let instance = null;
-class Logger {
-  constructor() {
+var instance = null;
+
+var Logger = function () {
+  function Logger() {
+    babelHelpers.classCallCheck(this, Logger);
+
     if (!instance) {
       instance = this;
     }
@@ -257,54 +254,92 @@ class Logger {
    * 设置等级
    * @param level [DEBUG,INFO,WARN,ERROR,OFF]
    */
-  setLevel(level) {
-    this.logLevel = Object.assign({}, this.DEBUG, level);
-  }
 
-  /***
-   * log debug
-   * @param args
-   */
-  debug(...args) {
-    this._log(this.DEBUG, args);
-  }
 
-  /***
-   * log info
-   * @param args
-   */
-  info(...args) {
-    this._log(this.INFO, args);
-  }
+  babelHelpers.createClass(Logger, [{
+    key: 'setLevel',
+    value: function setLevel(level) {
+      this.logLevel = Object.assign({}, this.DEBUG, level);
+    }
 
-  /***
-   * log warn
-   * @param args
-   */
-  warn(...args) {
-    this._log(this.WARN, args);
-  }
+    /***
+     * log debug
+     * @param args
+     */
 
-  /***
-   * log error
-   * @param args
-   */
-  error(...args) {
-    this._log(this.ERROR, args);
-  }
+  }, {
+    key: 'debug',
+    value: function debug() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
-  _log(level = this.OFF, args) {
-    const type = level.type;
-    if (level.level >= this.logLevel.level) {
-      const f = console[type];
-      if (typeof f === 'function') {
-        Function.apply.apply(f, [console, args]);
+      this._log(this.DEBUG, args);
+    }
+
+    /***
+     * log info
+     * @param args
+     */
+
+  }, {
+    key: 'info',
+    value: function info() {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      this._log(this.INFO, args);
+    }
+
+    /***
+     * log warn
+     * @param args
+     */
+
+  }, {
+    key: 'warn',
+    value: function warn() {
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
+      this._log(this.WARN, args);
+    }
+
+    /***
+     * log error
+     * @param args
+     */
+
+  }, {
+    key: 'error',
+    value: function error() {
+      for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
+      }
+
+      this._log(this.ERROR, args);
+    }
+  }, {
+    key: '_log',
+    value: function _log() {
+      var level = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.OFF;
+      var args = arguments[1];
+
+      var type = level.type;
+      if (level.level >= this.logLevel.level) {
+        var f = console[type];
+        if (typeof f === 'function') {
+          Function.apply.apply(f, [console, args]);
+        }
       }
     }
-  }
-}
+  }]);
+  return Logger;
+}();
 
-var index$1 = new Logger();
+var Logger$1 = new Logger();
 
 function _validateKey(key) {
   assert(!isNil(key), '[LocalStorage] key不能为空');
@@ -313,7 +348,7 @@ function _validateKey(key) {
 
 function setItem(key, value, expire) {
   _validateKey(key);
-  isNil(value) && index$1.warn('[LocalStorage] value为null或undefined');
+  isNil(value) && Logger$1.warn('[LocalStorage] value为null或undefined');
   var _expire = expire || 0;
   assert(isNumber(_expire), '[LocalStorage] expire必须是number');
 
@@ -321,7 +356,7 @@ function setItem(key, value, expire) {
     value: value,
     expireTime: _expire > 0 ? Date.now() + _expire : null
   };
-  index$1.debug('[LocalStorage] save', 'key: ' + key, storeValue);
+  Logger$1.debug('[LocalStorage] save', 'key: ' + key, storeValue);
   localStorage.setItem(key, JSON.stringify(storeValue));
 }
 
@@ -332,7 +367,7 @@ function getItem(key) {
   try {
     jsonValue = JSON.parse(localStorageString);
   } catch (e) {
-    index$1.warn('[LocalStorage] 存储的值无法解析');
+    Logger$1.warn('[LocalStorage] 存储的值无法解析');
   }
   var _jsonValue = jsonValue,
       value = _jsonValue.value,
@@ -341,7 +376,7 @@ function getItem(key) {
   if (isNil(expireTime) || expireTime >= Date.now()) {
     return value;
   } else {
-    index$1.debug('key\u4E3A' + key + '\u7684\u503C\u8D85\u65F6\u5220\u9664');
+    Logger$1.debug('key\u4E3A' + key + '\u7684\u503C\u8D85\u65F6\u5220\u9664');
     localStorage.removeItem(key);
     return undefined;
   }
@@ -370,12 +405,12 @@ function _validateKey$1(key) {
 
 function setItem$1(key, value) {
   _validateKey$1(key);
-  isNil(value) && index$1.warn('[SessionStorage] value为null或undefined');
+  isNil(value) && Logger$1.warn('[SessionStorage] value为null或undefined');
 
   var storeValue = {
     value: value
   };
-  index$1.debug('[SessionStorage] save', 'key: ' + key, storeValue);
+  Logger$1.debug('[SessionStorage] save', 'key: ' + key, storeValue);
   sessionStorage.setItem(key, JSON.stringify(storeValue));
 }
 
@@ -386,7 +421,7 @@ function getItem$1(key) {
   try {
     jsonValue = JSON.parse(storageString);
   } catch (e) {
-    index$1.warn('[SessionStorage] 存储的值无法解析');
+    Logger$1.warn('[SessionStorage] 存储的值无法解析');
   }
   var _jsonValue = jsonValue,
       value = _jsonValue.value;
@@ -410,6 +445,7 @@ var sessionStorage$1 = {
   clear: clear$1
 };
 
+Logger$1.setLevel(process.env.NODE_ENV === 'production' ? Logger$1.WARN : Logger$1.DEBUG);
 var index = {
   localStorage: localStorage$1,
   sessionStorage: sessionStorage$1
