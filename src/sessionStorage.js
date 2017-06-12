@@ -1,6 +1,6 @@
-import isString from 'lodash-es/isString'
+import isString from 'lodash/isString'
 import {assert, isNil} from './util'
-import Logger from './util/logger'
+import Logger from 'logger-js'
 
 function _validateKey(key) {
   assert(!isNil(key), '[SessionStorage] key不能为空')
