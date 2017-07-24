@@ -15,7 +15,7 @@ const banner =
  * Released under the MIT License.
  */
 `;
-const external = ['logger-js', 'lodash/isNumber', 'lodash/isString'];
+const external = ['log4js-helper', 'lodash/isNumber', 'lodash/isString'];
 const builds = {
   "full-umd": {
     entry: path.resolve(__dirname, '../src/index.js'),
@@ -60,7 +60,7 @@ function genConfig(opts) {
     banner: opts.banner,
     moduleName: opts.moduleName,
     globals: {
-      'logger-js': 'Logger'
+      'log4js-helper': 'Logger'
     },
     plugins: [
       replace({

@@ -1,7 +1,7 @@
 import isNumber from 'lodash/isNumber'
 import isString from 'lodash/isString'
 import {assert, isNil} from './util'
-import Logger from 'logger-js'
+import Logger from 'log4js-helper'
 
 function _validateKey(key) {
   assert(!isNil(key), '[LocalStorage] key不能为空')

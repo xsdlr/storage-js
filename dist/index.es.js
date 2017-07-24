@@ -1,12 +1,12 @@
 /*
- * storage-js v0.0.1
+ * storage4js v0.0.1
  * (c) xsdlr
  * Released under the MIT License.
  */
 
 import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
-import Logger from 'logger-js';
+import Logger from 'log4js-helper';
 
 function assert(condition, msg) {
   if (!condition) { throw new Error(("" + msg)) }

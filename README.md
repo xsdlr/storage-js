@@ -1,6 +1,6 @@
 # Install
 ```sh
-npm i https://github.com/xsdlr/storage-js -S
+npm i storage4js -S
 ```
 
 # Example

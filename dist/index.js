@@ -1,13 +1,13 @@
 /*
- * storage-js v0.0.1
+ * storage4js v0.0.1
  * (c) xsdlr
  * Released under the MIT License.
  */
 
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash/isNumber'), require('lodash/isString'), require('logger-js')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'lodash/isNumber', 'lodash/isString', 'logger-js'], factory) :
-	(factory((global['storage-js'] = global['storage-js'] || {}),global.isNumber,global.isString,global.Logger));
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash/isNumber'), require('lodash/isString'), require('log4js-helper')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'lodash/isNumber', 'lodash/isString', 'log4js-helper'], factory) :
+	(factory((global.storage4js = global.storage4js || {}),global.isNumber,global.isString,global.Logger));
 }(this, (function (exports,isNumber,isString,Logger) { 'use strict';
 
 isNumber = 'default' in isNumber ? isNumber['default'] : isNumber;

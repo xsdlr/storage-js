@@ -1,5 +1,5 @@
 /*
- * storage-js v0.0.1
+ * storage4js v0.0.1
  * (c) xsdlr
  * Released under the MIT License.
  */
@@ -12,7 +12,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var isNumber = _interopDefault(require('lodash/isNumber'));
 var isString = _interopDefault(require('lodash/isString'));
-var Logger = _interopDefault(require('logger-js'));
+var Logger = _interopDefault(require('log4js-helper'));
 
 function assert(condition, msg) {
   if (!condition) { throw new Error(("" + msg)) }
