@@ -6,10 +6,10 @@ npm i storage4js -S
 # Example
 ```javascript
 // ES6
-import { localStorage, sessionStorage } from 'storage-js'
+import { localStorage, sessionStorage } from 'storage4js'
 // ES5
-var localStorage = require('storage-js').localStorage
-var sessionStorage = require('storage-js').sessionStorage
+var localStorage = require('storage4js').localStorage
+var sessionStorage = require('storage4js').sessionStorage
 
 // localStorage
 localStorage.setItem('foo', 123, 1000) // params are key, value, ttl

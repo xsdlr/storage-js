@@ -3,13 +3,13 @@ import {assert, isNil} from './util'
 import Logger from 'log4js-helper'
 
 function _validateKey(key) {
-  assert(!isNil(key), '[SessionStorage] key不能为空')
-  assert(isString(key), '[SessionStorage] key必须为string')
+  assert(!isNil(key), '[SessionStorage] require key')
+  assert(isString(key), '[SessionStorage] key must be a string')
 }
 
 export function setItem(key, value) {
   _validateKey(key)
-  isNil(value) && Logger.warn('[SessionStorage] value为null或undefined')
+  isNil(value) && Logger.warn('[SessionStorage] value is null or undefined')
 
   const storeValue = {
     value
@@ -25,7 +25,7 @@ export function getItem(key) {
   try {
     jsonValue = JSON.parse(storageString)
   } catch (e) {
-    Logger.warn('[SessionStorage] 存储的值无法解析')
+    Logger.warn('[SessionStorage] store value can\'t be parsed')
   }
   const {value} = jsonValue
   return value

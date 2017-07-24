@@ -4,15 +4,15 @@ import {assert, isNil} from './util'
 import Logger from 'log4js-helper'
 
 function _validateKey(key) {
-  assert(!isNil(key), '[LocalStorage] key不能为空')
-  assert(isString(key), '[LocalStorage] key必须为string')
+  assert(!isNil(key), '[LocalStorage] require key')
+  assert(isString(key), '[LocalStorage] key must be a string')
 }
 
 export function setItem(key, value, expire) {
   _validateKey(key)
-  isNil(value) && Logger.warn('[LocalStorage] value为null或undefined')
+  isNil(value) && Logger.warn('[LocalStorage] value is null or undefined')
   const _expire = expire || 0
-  assert(isNumber(_expire), '[LocalStorage] expire必须是number')
+  assert(isNumber(_expire), '[LocalStorage] expire must be a number')
 
   const storeValue = {
     value,
@@ -29,13 +29,13 @@ export function getItem(key) {
   try {
     jsonValue = JSON.parse(localStorageString)
   } catch (e) {
-    Logger.warn('[LocalStorage] 存储的值无法解析')
+    Logger.warn('[LocalStorage] store value can\'t be parsed')
   }
   const {value, expireTime} = jsonValue
   if (isNil(expireTime) || expireTime >= Date.now()) {
     return value
   } else {
-    Logger.debug(`key为${key}的值超时删除`)
+    Logger.debug(`remove expire value, key is ${key}`)
     localStorage.removeItem(key)
     return undefined
   }
