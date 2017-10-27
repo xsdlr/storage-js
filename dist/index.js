@@ -1,5 +1,5 @@
 /*
- * storage4js v0.0.2
+ * storage4js v0.0.3
  * (c) xsdlr
  * Released under the MIT License.
  */
@@ -122,7 +122,6 @@ var sessionStorage$1 = {
   clear: clear$1
 };
 
-Logger.setLevel(process.env.NODE_ENV === 'production' ? Logger.WARN : Logger.DEBUG);
 var index = {
   localStorage: localStorage$1,
   sessionStorage: sessionStorage$1
