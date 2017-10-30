@@ -1,5 +1,5 @@
 /*
- * storage4js v0.0.3
+ * storage4js v0.0.4
  * (c) xsdlr
  * Released under the MIT License.
  */
